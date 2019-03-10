@@ -35,8 +35,12 @@ public class userService {
         user.setUserSee(1);
         user isSave = userDao.save(user);
         if(isSave == null)
-        return true;
-        else return false;
+        return false;
+        else
+        {
+            System.out.println(user.getUsername());
+            return true;
+        }
     }
 
 }

@@ -32,7 +32,7 @@ public class userController {
 
         if(userService.regist(username,password,sex,age,telephone,email)){
             System.out.println("succes");
-            return "main";
+            return "login";
         }else {
             model.addAttribute("error", "用户名或者密码错误");
             System.out.println("failture");
@@ -55,7 +55,7 @@ public class userController {
         String password=request.getParameter("password");
         if(userService.login(username, password)){
             System.out.println("succes");
-            return "index";
+            return "main";
         }else {
             model.addAttribute("error", "用户名或者密码错误");
             System.out.println("failture");

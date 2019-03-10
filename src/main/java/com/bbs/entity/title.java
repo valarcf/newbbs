@@ -1,12 +1,21 @@
 package com.bbs.entity;
 
-
 import javax.persistence.*;
 import java.sql.Date;
 
 /**
  * Created by valar on 2019/1/5.
  */
+import lombok.*;
+//自动生成get() 和 set()
+@Getter
+@Setter
+//自动重写方法
+@ToString
+@EqualsAndHashCode
+//自动创建构造方法
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class title {
     @Id
@@ -21,59 +30,5 @@ public class title {
     private String titStyle;
     private int titSee;
 
-    public int getTitId() {
-        return titId;
-    }
 
-    public void setTitId(int titId) {
-        this.titId = titId;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public String getTitText() {
-        return titText;
-    }
-
-    public void setTitText(String titText) {
-        this.titText = titText;
-    }
-
-    public String getTitTime() {
-        return titTime;
-    }
-
-    public void setTitTime(String titTime) {
-        this.titTime = titTime;
-    }
-
-    public String getTitName() {
-        return titName;
-    }
-
-    public void setTitName(String titName) {
-        this.titName = titName;
-    }
-
-    public String getTitStyle() {
-        return titStyle;
-    }
-
-    public void setTitStyle(String titStyle) {
-        this.titStyle = titStyle;
-    }
-
-    public int getTitSee() {
-        return titSee;
-    }
-
-    public void setTitSee(int titSee) {
-        this.titSee = titSee;
-    }
 }
