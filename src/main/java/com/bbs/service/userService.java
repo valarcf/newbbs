@@ -13,14 +13,11 @@ import org.springframework.stereotype.Service;
 public class userService {
     @Autowired
     private userDao userDao;
-    public boolean login(String username, String password){
-        user user = userDao.findByUserNameAndPw(username,password);
-        if(null == user){
-            return false;
-        }else {
-            return true;
-        }
+    public user login(String username, String password){
+        return userDao.findByUserNameAndPw(username,password);
+
     }
+
     public boolean regist(String name,String pw,String sex,int age,String tel,String email){
         user user = new user();
         user.setUseraddress(null);

@@ -16,14 +16,17 @@
     <h1> 欢迎访问</h1>
     <h1>抽象论坛</h1>
     <br>
-    <form method="post" action="login" id="myform">
+    <form method="post" action="dologin" id="myform">
         <strong>用户名：</strong><input type="text" name="username" size="25" maxlength="16">
         <br><br>
         <strong>密 码：</strong><input type="password" name="password" size="25" maxlength="16">
         <br><br>
+        <div th:if="${error}">
+            <div th:text="${error}" style="color:#F00"></div>
+        </div>
         <a href="/regist"><input type="button" value="注册"></a>
         <input type="button" value="登录" onclick="check()"> <br><br>
-        <a href="onlyread.h">游客</a></form>
+        <a href="/onlyread">游客</a></form>
 </center>
 <script type="text/javascript">
     // 检查表单元素的值是否为空
