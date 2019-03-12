@@ -22,6 +22,8 @@ public class title {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int titId;
     private int userId;
+    private String username;
+    private  String email;
     @Column( columnDefinition = "text")
     private String titText;
     @Column(columnDefinition = "varchar(64)")

@@ -19,23 +19,23 @@
 <center>
     <table width="500" height="300" border="5" cellspacing="5" cellpadding="5">
         <tr><td width="129"><font size="5" color="#FFFFFF">用户名</font></td>
-            <td width="322"><font size="5" color="#FFFFFF"><%=session.getAttribute("username")%></font></td>
+            <td width="322"><font size="5" color="#FFFFFF" th:text = "${session.username}"></font></td>
         </tr>
         <tr>
             <td><font size="5" color="#FFFFFF">性 别</font></td>
-            <td><font size="5" color="#FFFFFF"><%=session.getAttribute("sex")%></font></td>
+            <td><font size="5" color="#FFFFFF" th:text = "${session.sex}"></font></td>
         </tr>
         <tr>
             <td><font size="5" color="#FFFFFF">年 龄</font></td>
-            <td><font size="5" color="#FFFFFF"><%=session.getAttribute("age")%></font></td>
+            <td><font size="5" color="#FFFFFF" th:text = "${session.age}"></font></td>
         </tr>
         <tr>
             <td><font size="5" color="#FFFFFF">电 话</font></td>
-            <td><font size="5" color="#FFFFFF"><%=session.getAttribute("tel")%></font></td>
+            <td><font size="5" color="#FFFFFF" th:text = "${session.tel}"></font></td>
         </tr>
         <tr>
             <td><font size="5" color="#FFFFFF">邮 箱</font></td>
-            <td><font size="5" color="#FFFFFF"><%=session.getAttribute("email")%></font></td>
+            <td><font size="5" color="#FFFFFF" th:text = "${session.email}"></font></td>
         </tr>
     </table>
 </center>
