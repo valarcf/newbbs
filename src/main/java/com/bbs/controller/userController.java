@@ -1,17 +1,22 @@
 package com.bbs.controller;
 
+import com.bbs.entity.title;
 import com.bbs.entity.user;
 import com.bbs.service.titleService;
 import com.bbs.service.userService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 
 /**
@@ -27,11 +32,18 @@ public class userController {
 
 
     private user user;
-
-    @RequestMapping(value = "/discuss/{pageNo}")
-    public String discuss(@PathVariable("id") String id, Model model) {
-        System.out.println("person");
-        return "person";
+    @RequestMapping(value = "list")
+    public String listSourceCode(HttpServletRequest request, HttpServletResponse response ,Model model){
+        List<title> articles = titleService.list();
+        System.out.println(111);
+        model.addAttribute("articles", articles);
+        return "dissess";
+    }
+    @RequestMapping(value = "/dissess")
+    public String discuss(Model model) {
+        List<title> articles = titleService.list();
+        model.addAttribute("articles", articles);
+        return "dissess";
     }
     @RequestMapping(value = "/person")
     public String person(Model model) {

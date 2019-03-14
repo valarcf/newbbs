@@ -5,84 +5,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>login</title>
-    <link th:href="@{/bootstrap/css/bootstrap.css}" rel="stylesheet"/>
-    <link th:href="@{/bootstrap/css/bootstrap-theme.css}" rel="stylesheet"/>
-    <link th:href="@{/css/signin.css}" rel="stylesheet"/>
+
+    <link th:href="@{/css/sun.css}" rel="stylesheet"/>
+
 </head>
 <body>
 
-<table align=center width=800 border=4 cellspacing=4 cellpadding=4>
-    <tr>
-        <td width=150 height=60>
-            <font size=5> 帖子主题</font>
-        </td>
-        <td width=150>
-            <font size=5> 发表者</font>
-        </td>
-        <td width=150>
-            <font size=5> 发表时间 </font>
-        </td>
-    </tr>
-</table>
-    <br><br><br><br>
-    <center>
-        <h2>浏览帖子</h2>
-    </center>
-    <br>
-    <table align=center width=800 border=4 cellspacing=4 cellpadding=4>
-        <tr>
-            <td width=150 height=40>
-                <font size=5><a href=detail.jsp?id="+id+">" + subject + "</a></font>
-            </td>
-            <td width=150>
-                <font size=5>" + name + " </font>
-            </td>
-            <td width=150>
-                <font size=5> "+time+" </font>
-            </td>
-        </tr>
-    </table>
-        <table align="center" width="800" border="5" cellspacing="5" cellpadding="5">
-            <tr>
-                <td>
-                    <form action="dissess.jsp" method="post">
-                        <table border="0">
-                            <tr>
-                                <td>
-                                    目前页数：<font color="red"><%=pageNO %>
-                                </font>
-                                </td>
-                                <td>
-                                    总页数：<font color="red"><%=lastPage%>
-                                </font>
-                                </td>
-                                <td>
-                                    <a href=dissess.jsp?pageNO=<%=firstPage%>>【第一页】</a>
-                                </td>
-                                <td>
-                                    <a href=dissess.jsp?pageNO=<%=prePage%>>【上一页】 </a>
-                                </td>
-                                <td>
-                                    <a href=dissess.jsp?pageNO=<%=nextPage%>>【下一页】 </a>
-                                </td>
-                                <td>
-                                    <a href=dissess.jsp?pageNO=<%=lastPage%>>【最后一页】 </a>
-                                </td>
-                                <td>
-                                    输入页次：
-                                    <input type=text size=3 name=pageNO value=<%=pageNO %>>
+<div th:include="/common/top :: top"></div>
 
-                                </td>
-                                <td>
-                                    <input type=submit name=send value="送出  ">
-                                </td>
-                            </tr>
-                        </table>
-                    </form>
-            </tr>
-        </table>
-        <center><input type="button" value="返回" onclick=history.back();></center>
+<div th:if="${not #lists.isEmpty(articles)}">
+    <div th:each="articles:${articles}">
+        <div class="row">
+            <div class="container">
+                <div class="jumbotron">
+                    <h3 th:text="${articles.titlName}"></h3>
+                    <span class="summary" th:text="${articles.titText}"></span><br/><br/>
+                    <p><a class="btn btn-primary btn-lg" th:href="@{'/article/detail/'+${articles.id}}" role="button">阅读全文</a> </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
+        <center><input type="button" value="返回" onclick=history.back();>
+        </center>
 </body>
+<script th:href="@{/jquery-3.2.1.min.js}" type="text/javascript"></script>
+<script th:href="@{/bootstrap/js/bootstrap.js}"></script>
 </html>
