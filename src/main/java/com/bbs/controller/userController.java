@@ -1,22 +1,21 @@
 package com.bbs.controller;
 
+import com.bbs.entity.reply;
 import com.bbs.entity.title;
 import com.bbs.entity.user;
+import com.bbs.service.replyService;
 import com.bbs.service.titleService;
 import com.bbs.service.userService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Optional;
 
 
 /**
@@ -25,24 +24,48 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "")
 public class userController {
+
     @Autowired
     private titleService titleService;
     @Autowired
     private userService userService;
 
-
+    @Autowired
+    private replyService replyService;
     private user user;
-    @RequestMapping(value = "list")
-    public String listSourceCode(HttpServletRequest request, HttpServletResponse response ,Model model){
+
+    @RequestMapping(value = "/reply", method = RequestMethod.POST)
+    public String reply(HttpServletRequest request, HttpSession session, Model model) {
+         int titId = Integer.parseInt(request.getParameter("id"));
+         String replyText = request.getParameter("content");
+         int userId = Integer.parseInt(request.getParameter("userId"));
+         String username = request.getParameter("username");
         List<title> articles = titleService.list();
-        System.out.println(111);
-        model.addAttribute("articles", articles);
-        return "dissess";
+        model.addAttribute("titles", articles);
+        if(replyService.doReply(titId,replyText,userId,username)) {
+            model.addAttribute("error", "回复成功！");
+            return "dissess";
+        } else {
+            model.addAttribute("error", "回复失败！");
+            return "dissess";
+        }
+    }
+    @RequestMapping("/detail")
+    public String detail(@RequestParam(value="id",defaultValue = "1")  Integer id, Model model) {
+        System.out.println(134);
+        title title = titleService.search(id);
+        System.out.println(title.getTitName());
+        System.out.println(title.getTitName());
+        List<reply> articles = replyService.getReply(id);
+        System.out.println(articles.size());
+        model.addAttribute("replys", articles);
+        model.addAttribute("title", title);
+        return "detail";
     }
     @RequestMapping(value = "/dissess")
     public String discuss(Model model) {
         List<title> articles = titleService.list();
-        model.addAttribute("articles", articles);
+        model.addAttribute("titles", articles);
         return "dissess";
     }
     @RequestMapping(value = "/person")

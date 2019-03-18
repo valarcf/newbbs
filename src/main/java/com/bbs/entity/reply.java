@@ -18,13 +18,14 @@ import lombok.*;
 @NoArgsConstructor
 @Entity
 public class reply {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int disId;
+    private int Id;
+    private int titId;
     @Column(columnDefinition = "varchar(64)")
     private String replyTime;
     @Column(columnDefinition = "text")
     private String replyText;
     private int userId;
+    private String username;
 }

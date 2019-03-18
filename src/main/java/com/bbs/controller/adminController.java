@@ -1,11 +1,14 @@
 package com.bbs.controller;
 
+import com.bbs.entity.admin;
 import com.bbs.service.adminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -23,6 +26,10 @@ public class adminController {
             return "admin/login";
     }
 
+    @RequestMapping(value = "/json",method = RequestMethod.POST)
+    public @ResponseBody admin js(@RequestBody admin reply){
+        return reply;
+    }
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public String doLogin(HttpServletRequest request, HttpSession session, Model model){
         String username=request.getParameter("username");
